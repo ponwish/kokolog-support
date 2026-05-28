@@ -1,0 +1,1592 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>ここログ — 友だちと場所でつながる、ゆるい地図</title>
+<meta name="description" content="「ここ、よかった」を友だちと共有できる、ゆるい場所共有アプリ。位置共有しない、SNS疲れしない、4種類の状態タグで残せる、新しいカタチの地図。" />
+<meta name="theme-color" content="#1F5C44" />
+<link rel="canonical" href="https://kokolog.cherenity.com/about/" />
+
+<!-- OGP / Twitter -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ここログ" />
+<meta property="og:title" content="ここログ — 友だちと場所でつながる、ゆるい地図" />
+<meta property="og:description" content="「ここ、よかった」を友だちと共有できる、ゆるい場所共有アプリ。" />
+<meta property="og:url" content="https://kokolog.cherenity.com/about/" />
+<meta property="og:image" content="https://kokolog.cherenity.com/og.png" />
+<meta property="og:locale" content="ja_JP" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="ここログ — 友だちと場所でつながる、ゆるい地図" />
+<meta name="twitter:description" content="「ここ、よかった」を友だちと共有できる、ゆるい場所共有アプリ。" />
+<meta name="twitter:image" content="https://kokolog.cherenity.com/og.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "Organization", "name": "ここログ", "alternateName": "KokoLog",
+      "url": "https://kokolog.cherenity.com/", "logo": "https://kokolog.cherenity.com/icon-512.png" },
+    { "@type": "WebApplication", "name": "ここログ", "url": "https://kokolog.cherenity.com/",
+      "applicationCategory": "SocialNetworkingApplication", "operatingSystem": "Web, iOS",
+      "description": "「ここ、よかった」を友だちと共有できる、ゆるい場所共有アプリ。",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" } }
+  ]
+}
+</script>
+
+<script src="image-slot.js"></script>
+
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" rx="28" fill="#1F5C44"/>
+  <path d="M100 50c-16 0-26 12-26 26 0 16 14 26 26 40 12-14 26-24 26-40 0-14-10-26-26-26z" fill="#9BE56B"/>
+  <circle cx="100" cy="76" r="10" fill="#0C2A1F"/>
+</svg>
+</template>
+
+<style>
+:root{
+  --paper:        #FBF9F2;
+  --paper-2:      #F4EFDD;
+  --cream:        #F1EBD5;
+  --ink:          #1B201D;
+  --ink-2:        #0E1411;
+  --stone:        #6c726a;
+  --mist:         #DDE2D6;
+
+  --green:        #2F7D5C;
+  --green-dk:     #143E2D;
+  --green-deep:   #0C2A1F;
+  --green-lt:     #54A782;
+  --green-bright: #9BE56B;       /* punchy accent */
+  --green-tint:   #E8F1EB;
+
+  --amber:        #E8A23A;
+  --amber-bright: #FFC85A;
+  --blue:         #3A7CA5;
+  --red:          #C46A5A;
+  --lilac:        #C9B8E6;
+
+  --font-jp: "Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{
+  margin:0;padding:0;background:var(--paper);color:var(--ink);
+  font-family:var(--font-jp);font-weight:500;line-height:1.7;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+
+/* ── Layout ───────────────────────────────────────────────── */
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+@media(max-width:640px){.wrap{padding:0 20px}}
+
+.eyebrow{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--green-dk);font-weight:600;
+  display:inline-flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:currentColor;display:inline-block}
+.eyebrow.on-dark{color:var(--green-bright)}
+
+h1,h2,h3,h4{margin:0;color:inherit;font-weight:900;letter-spacing:-.025em;line-height:1.08;text-wrap:balance}
+h2{font-size:clamp(34px,5.4vw,68px)}
+h3{font-size:clamp(22px,2.6vw,32px);line-height:1.25}
+p{margin:0;text-wrap:pretty}
+
+section{padding:120px 0;position:relative}
+@media(max-width:720px){section{padding:80px 0}}
+
+/* ── Buttons ──────────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:18px 28px;border-radius:999px;font-weight:800;font-size:16px;
+  line-height:1;border:2px solid transparent;
+  transition:transform .15s ease, background .15s ease, color .15s ease;
+  cursor:pointer;text-decoration:none;
+}
+.btn-primary{background:var(--ink-2);color:var(--paper);border-color:var(--ink-2)}
+.btn-primary:hover{background:var(--green-dk);border-color:var(--green-dk);transform:translateY(-1px)}
+.btn-accent{background:var(--green-bright);color:var(--ink-2);border-color:var(--green-bright)}
+.btn-accent:hover{background:#b1f084;border-color:#b1f084;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--ink-2);border-color:var(--ink-2)}
+.btn-outline:hover{background:var(--ink-2);color:var(--paper)}
+.btn-on-dark{background:var(--green-bright);color:var(--green-deep);border-color:var(--green-bright)}
+.btn-on-dark:hover{background:#fff;border-color:#fff}
+.btn .arr{width:16px;height:16px}
+
+/* ── Header ───────────────────────────────────────────────── */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(251,249,242,.88);
+  backdrop-filter:saturate(140%) blur(14px);
+  -webkit-backdrop-filter:saturate(140%) blur(14px);
+  border-bottom:1px solid rgba(20,62,45,.08);
+}
+.site-header .inner{
+  max-width:1240px;margin:0 auto;padding:18px 28px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.brand{display:inline-flex;align-items:center;gap:11px;font-weight:900;letter-spacing:-.015em;font-size:19px;color:var(--ink-2)}
+.brand-mark{width:34px;height:34px;border-radius:9px;overflow:hidden;box-shadow:0 0 0 1px rgba(20,62,45,.1), 0 6px 14px -6px rgba(20,62,45,.3)}
+.nav{display:flex;align-items:center;gap:4px}
+.nav a{font-size:14px;color:var(--ink-2);padding:10px 14px;border-radius:10px;font-weight:600}
+.nav a:hover{background:rgba(47,125,92,.08)}
+.nav .cta{
+  background:var(--ink-2);color:var(--paper);font-weight:800;padding:12px 20px;border-radius:999px;
+  display:inline-flex;align-items:center;gap:8px;margin-left:8px;
+}
+.nav .cta:hover{background:var(--green-dk)}
+@media(max-width:780px){
+  .nav a:not(.cta){display:none}
+}
+
+/* ── Hero ─────────────────────────────────────────────────── */
+.hero{
+  padding:80px 0 140px;position:relative;overflow:hidden;
+  background:var(--paper);
+}
+.hero .wrap{position:relative}
+.hero-grid{
+  display:grid;grid-template-columns:1.15fr 1fr;gap:48px;align-items:center;
+  position:relative;z-index:2;
+}
+@media(max-width:960px){.hero-grid{grid-template-columns:1fr;gap:48px}}
+
+.hero-copy h1{
+  font-size:clamp(46px,8.8vw,120px);
+  line-height:.97;letter-spacing:-.035em;
+  color:var(--ink-2);
+}
+.hero-copy h1 .qmark{color:var(--green-lt);font-weight:600}
+.hero-copy h1 .accent{color:var(--green-dk)}
+.hero-copy h1 .ul{
+  background-image:linear-gradient(180deg, transparent 70%, var(--green-bright) 70%, var(--green-bright) 96%, transparent 96%);
+  padding:0 .04em;
+}
+.hero-copy .lede{
+  margin-top:32px;color:var(--ink);font-size:18px;line-height:1.85;max-width:30em;font-weight:500;
+}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.hero-meta{
+  display:flex;flex-wrap:wrap;gap:14px 22px;margin-top:36px;
+  font-family:var(--font-mono);font-size:11.5px;color:var(--green-dk);letter-spacing:.1em;font-weight:600;
+}
+.hero-meta span{display:inline-flex;align-items:center;gap:7px}
+.hero-meta .dot{width:7px;height:7px;background:var(--green-bright);border-radius:50%;display:inline-block;box-shadow:0 0 0 3px rgba(155,229,107,.25)}
+
+/* Phone block */
+.hero-mock{
+  position:relative;display:flex;justify-content:center;align-items:center;
+  min-height:620px;
+  perspective:1600px;
+  perspective-origin:50% 40%;
+}
+.phone{
+  width:300px;height:610px;background:#0c0b0a;border-radius:44px;padding:8px;
+  box-shadow:0 50px 80px -40px rgba(20,62,45,.5), 0 0 0 1px rgba(0,0,0,.06);
+  position:relative;z-index:2;
+}
+
+/* Hero phone — starts tilted ~10° back-right, settles to face-front as user scrolls */
+.hero-phone-3d{
+  /* progress is set by JS (0 = tilted, 1 = facing) */
+  --p:0;
+  transform-style:preserve-3d;
+  transform-origin:50% 55%;
+  /* compose: rotateY (10deg -> 0) and rotateX (4deg -> 0) and small lift */
+  transform:
+    perspective(1600px)
+    rotateY(calc((1 - var(--p)) * 10deg))
+    rotateX(calc((1 - var(--p)) * 4deg))
+    translateZ(calc(var(--p) * 12px));
+  /* dynamic shadow + a subtle gloss that fades out */
+  box-shadow:
+    /* main soft drop */
+    calc((1 - var(--p)) * -22px) 50px 80px -34px rgba(20,62,45,.55),
+    0 0 0 1px rgba(0,0,0,.06);
+  transition:box-shadow .25s linear;
+  will-change:transform;
+}
+.hero-phone-3d::after{
+  /* glossy highlight that sweeps as it rotates upright */
+  content:"";position:absolute;inset:0;border-radius:44px;pointer-events:none;
+  background:linear-gradient(
+    115deg,
+    rgba(255,255,255,0) 35%,
+    rgba(255,255,255,calc(.18 * (1 - var(--p)))) 50%,
+    rgba(255,255,255,0) 65%
+  );
+  mix-blend-mode:screen;
+  opacity:calc(1 - var(--p) * .6);
+  transition:opacity .15s linear;
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-phone-3d{transform:none;transition:none}
+  .hero-phone-3d::after{display:none}
+}
+.phone-screen{
+  width:100%;height:100%;border-radius:36px;overflow:hidden;position:relative;
+  background:#eef1ea;
+}
+.phone .island{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:88px;height:24px;background:#0c0b0a;border-radius:999px;z-index:6}
+.phone image-slot{
+  position:absolute;inset:0;width:100%!important;height:100%!important;
+}
+
+/* Stickers */
+.sticker{
+  position:absolute;z-index:3;
+  filter:drop-shadow(0 12px 22px rgba(20,62,45,.18));
+  user-select:none;pointer-events:none;
+}
+.sticker.tag{
+  background:#fff;border:2px solid var(--ink-2);border-radius:999px;
+  padding:10px 16px;font-weight:800;font-size:13.5px;color:var(--ink-2);
+  display:inline-flex;align-items:center;gap:8px;
+}
+.sticker.tag.green{background:var(--green-bright)}
+.sticker.tag.amber{background:var(--amber-bright)}
+.sticker.tag.lilac{background:var(--lilac)}
+.sticker.tag .sw{width:9px;height:9px;border-radius:50%;background:var(--ink-2)}
+.sticker.note{
+  background:var(--paper-2);border:2px solid var(--ink-2);border-radius:14px;
+  padding:14px 16px;font-weight:600;font-size:13px;max-width:200px;line-height:1.55;color:var(--ink-2);
+}
+.sticker.note .h{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;color:var(--green-dk);margin-bottom:4px}
+.sticker.pin{filter:drop-shadow(0 10px 16px rgba(20,62,45,.25))}
+.sticker.spark{color:var(--green-bright)}
+
+/* hero star bg */
+.hero-stars{
+  position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.6;
+}
+
+/* ── Marquee strip ─────────────────────────────────────── */
+.marquee-strip{
+  background:var(--ink-2);color:var(--paper);
+  border-top:2px solid var(--ink-2);border-bottom:2px solid var(--ink-2);
+  overflow:hidden;padding:18px 0;
+  font-weight:800;font-size:22px;letter-spacing:-.01em;
+}
+.marquee-track{
+  display:flex;gap:48px;animation:marquee 28s linear infinite;width:max-content;
+}
+.marquee-track span{display:inline-flex;align-items:center;gap:48px;white-space:nowrap}
+.marquee-track .dot{width:10px;height:10px;border-radius:50%;background:var(--green-bright);display:inline-block}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── Showcase (feature toggle, dark) ─────────────────────── */
+.showcase{
+  background:var(--green-deep);color:var(--paper);
+  position:relative;overflow:hidden;
+}
+.showcase::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:
+    radial-gradient(circle at 20% 0%, rgba(155,229,107,.06) 0%, transparent 45%),
+    radial-gradient(circle at 90% 100%, rgba(84,167,130,.1) 0%, transparent 45%);
+}
+.showcase .wrap{position:relative}
+.showcase h2{color:var(--paper)}
+.showcase h2 .accent{color:var(--green-bright)}
+.showcase .head{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:end;margin-bottom:64px}
+.showcase .head p{color:rgba(251,249,242,.7);font-size:16.5px;line-height:1.85;max-width:30em}
+@media(max-width:840px){.showcase .head{grid-template-columns:1fr;gap:18px}}
+
+.showcase-body{
+  display:grid;grid-template-columns:1fr 360px 1fr;gap:48px;align-items:start;
+}
+@media(max-width:1024px){
+  .showcase-body{grid-template-columns:1fr;gap:32px}
+}
+.sc-menu{display:flex;flex-direction:column;gap:10px}
+.sc-item{
+  display:grid;grid-template-columns:48px 1fr 24px;gap:14px;align-items:center;
+  padding:18px 20px;border-radius:18px;background:transparent;border:1.5px solid rgba(251,249,242,.12);
+  cursor:pointer;text-align:left;color:var(--paper);font-family:inherit;
+  transition:all .2s ease;
+}
+.sc-item:hover{background:rgba(251,249,242,.04);border-color:rgba(251,249,242,.25)}
+.sc-item.active{background:var(--green-bright);color:var(--green-deep);border-color:var(--green-bright)}
+.sc-item .n{
+  font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.05em;
+  background:rgba(251,249,242,.12);border-radius:8px;padding:8px 0;text-align:center;
+}
+.sc-item.active .n{background:var(--green-deep);color:var(--green-bright)}
+.sc-item .lab{font-weight:800;font-size:17px;letter-spacing:-.01em}
+.sc-item .arr-c{opacity:.5;display:flex;justify-content:flex-end}
+.sc-item.active .arr-c{opacity:1}
+
+.sc-phone{
+  justify-self:center;
+}
+.sc-phone .phone{box-shadow:0 50px 80px -40px rgba(0,0,0,.6), 0 0 0 1px rgba(155,229,107,.06)}
+
+.sc-detail{
+  position:relative;
+}
+.sc-pane{display:none;animation:fadein .35s ease}
+.sc-pane.active{display:block}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.sc-pane h3{color:var(--paper);font-size:28px;line-height:1.3}
+.sc-pane h3 mark{background:var(--green-bright);color:var(--green-deep);padding:0 .15em;border-radius:4px}
+.sc-pane p{margin-top:18px;color:rgba(251,249,242,.78);font-size:15.5px;line-height:1.95}
+.sc-pane .tags-demo{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+
+/* Phone-inner mocks (per pane) */
+.scr-mock{position:absolute;inset:0;display:flex;flex-direction:column;color:var(--ink-2);padding:46px 16px 18px;background:#FBF9F2}
+.scr-mock h4{font-size:15px;font-weight:800;margin-bottom:2px;letter-spacing:-.01em}
+.scr-mock .sub{font-size:11px;color:var(--stone);font-family:var(--font-mono);letter-spacing:.06em}
+.scr-mock .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+.tag-pill{
+  display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:999px;
+  font-size:12.5px;font-weight:700;border:1.5px solid;
+}
+.tag-pill .sw{width:8px;height:8px;border-radius:50%}
+.tag-yokatta{color:#1f5c44;border-color:#bcd9c9;background:#E8F1EB}
+.tag-yokatta .sw{background:var(--green)}
+.tag-kininaru{color:#9f6b1c;border-color:#ecd4a4;background:#FAEFD8}
+.tag-kininaru .sw{background:var(--amber)}
+.tag-mata{color:#27567a;border-color:#bdd2e3;background:#E2ECF3}
+.tag-mata .sw{background:var(--blue)}
+.tag-uun{color:#8a4a3d;border-color:#e2c8c1;background:#F3E1DC}
+.tag-uun .sw{background:var(--red)}
+
+.chip{
+  font-size:11.5px;color:var(--ink-2);background:#fff;border:1.5px solid var(--mist);
+  padding:7px 12px;border-radius:999px;font-weight:600;
+}
+.chip.on{background:var(--green-dk);color:var(--paper);border-color:var(--green-dk)}
+
+/* ── Stats / social proof band ───────────────────────────── */
+.stats{background:var(--paper-2);padding:80px 0}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+@media(max-width:780px){.stats .wrap{grid-template-columns:repeat(2,1fr);gap:32px}}
+.stat .n{
+  font-size:clamp(40px,5vw,64px);font-weight:900;letter-spacing:-.04em;line-height:1;color:var(--ink-2);
+}
+.stat .n .unit{font-size:.55em;color:var(--green-dk);margin-left:.1em}
+.stat .lab{
+  margin-top:10px;font-size:13px;color:var(--stone);font-weight:600;line-height:1.55;
+}
+
+/* ── Empathy quote cards ─────────────────────────────────── */
+.empathy{background:var(--paper)}
+.empathy .head{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:end;margin-bottom:54px}
+.empathy .head p{color:var(--stone);font-size:16.5px;line-height:1.9;max-width:32em}
+@media(max-width:840px){.empathy .head{grid-template-columns:1fr;gap:18px}}
+
+.empathy-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:980px){.empathy-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.empathy-grid{grid-template-columns:1fr}}
+.qcard{
+  background:#fff;border:2px solid var(--ink-2);border-radius:22px;padding:26px 24px 24px;
+  display:flex;flex-direction:column;gap:14px;position:relative;
+  transition:transform .2s ease;
+}
+.qcard:nth-child(2){background:var(--green-bright);transform:rotate(-1deg)}
+.qcard:nth-child(3){background:var(--amber-bright);transform:rotate(1deg)}
+.qcard:nth-child(4){background:var(--lilac)}
+.qcard:hover{transform:translateY(-4px) rotate(0)}
+.qcard .q{font-family:var(--font-mono);font-size:11px;color:var(--ink-2);opacity:.55;letter-spacing:.2em;font-weight:700}
+.qcard h3{font-size:19px;line-height:1.4;color:var(--ink-2)}
+.qcard p{font-size:13.5px;color:var(--ink-2);line-height:1.8;opacity:.85}
+
+/* ── Testimonials ────────────────────────────────────────── */
+.tests{background:var(--cream)}
+.tests .head{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:54px}
+@media(max-width:780px){.tests .head{grid-template-columns:1fr}}
+.tests h2 .star{color:var(--amber);display:inline-block;transform:translateY(-.05em)}
+
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:980px){.test-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.test-grid{grid-template-columns:1fr}}
+.test{
+  background:#fff;border:2px solid var(--ink-2);border-radius:24px;padding:26px;
+  display:flex;flex-direction:column;gap:14px;position:relative;
+}
+.test:nth-child(2){background:var(--paper);transform:rotate(-.6deg)}
+.test:nth-child(4){background:var(--green-tint);transform:rotate(.4deg)}
+.test:nth-child(5){background:var(--paper-2)}
+.test .stars{color:var(--amber);font-size:18px;letter-spacing:.05em}
+.test blockquote{margin:0;font-size:15.5px;line-height:1.85;color:var(--ink-2);font-weight:600}
+.test .who{
+  margin-top:auto;display:flex;align-items:center;gap:12px;padding-top:12px;border-top:1.5px dashed rgba(14,20,17,.18);
+}
+.test .ava{
+  width:38px;height:38px;border-radius:50%;background:var(--green-lt);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-family:var(--font-mono);font-size:13px;
+}
+.test .who .nm{font-weight:800;font-size:13.5px;color:var(--ink-2)}
+.test .who .src{font-size:11px;color:var(--stone);font-family:var(--font-mono);letter-spacing:.06em}
+
+/* ── Privacy (dark) ──────────────────────────────────────── */
+.privacy{background:var(--green-dk);color:var(--paper);position:relative;overflow:hidden}
+.privacy::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(transparent 49.7%, rgba(155,229,107,.07) 50%, transparent 50.3%),
+    linear-gradient(90deg, transparent 49.7%, rgba(155,229,107,.07) 50%, transparent 50.3%);
+  background-size:60px 60px;mask-image:radial-gradient(ellipse at center, #000 25%, transparent 75%);
+}
+.privacy .wrap{position:relative}
+.privacy h2{color:var(--paper)}
+.privacy h2 .accent{color:var(--green-bright)}
+.privacy .head{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:end;margin-bottom:54px}
+.privacy .head p{color:rgba(251,249,242,.72);font-size:16.5px;line-height:1.9;max-width:32em}
+@media(max-width:840px){.privacy .head{grid-template-columns:1fr;gap:18px}}
+
+.priv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:880px){.priv-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.priv-grid{grid-template-columns:1fr}}
+.priv{
+  background:rgba(251,249,242,.04);border:1.5px solid rgba(251,249,242,.16);
+  border-radius:22px;padding:26px;color:var(--paper);
+}
+.priv .ico{
+  width:46px;height:46px;border-radius:14px;background:var(--green-bright);color:var(--green-deep);
+  display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+}
+.priv h3{font-size:18px;color:var(--paper)}
+.priv p{margin-top:10px;font-size:14px;color:rgba(251,249,242,.7);line-height:1.85}
+
+/* ── How (3 steps) ───────────────────────────────────────── */
+.how{background:var(--paper)}
+.how .head{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:54px}
+@media(max-width:780px){.how .head{grid-template-columns:1fr}}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:900px){.steps-grid{grid-template-columns:1fr;gap:36px}}
+.step{
+  background:#fff;border:2px solid var(--ink-2);border-radius:24px;padding:28px;
+  display:flex;flex-direction:column;gap:16px;
+}
+.step:nth-child(2){background:var(--green-bright)}
+.step:nth-child(3){background:var(--paper-2)}
+.step .num{
+  width:56px;height:56px;background:var(--ink-2);color:var(--paper);border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-weight:800;font-size:18px;letter-spacing:.02em;
+}
+.step:nth-child(2) .num{background:var(--green-deep);color:var(--green-bright)}
+.step h3{font-size:22px;color:var(--ink-2)}
+.step p{font-size:14.5px;color:var(--ink-2);opacity:.8;line-height:1.85}
+.step-img{
+  margin-top:6px;height:200px;border-radius:16px;
+  background:var(--paper);border:1.5px solid rgba(14,20,17,.12);
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.step-img image-slot{position:absolute;inset:0;width:100%!important;height:100%!important}
+
+/* ── Comparison ──────────────────────────────────────────── */
+.compare{background:var(--paper-2)}
+.compare h2 .accent{color:var(--green-dk)}
+.compare .head{margin-bottom:54px;max-width:36em}
+.compare .head p{margin-top:18px;color:var(--stone);font-size:16.5px;line-height:1.9}
+.ctbl{
+  background:#fff;border:2px solid var(--ink-2);border-radius:24px;overflow:hidden;
+}
+.ctbl .crow{
+  display:grid;grid-template-columns:1.1fr 1.4fr 1.5fr;align-items:center;
+  border-bottom:1.5px solid rgba(14,20,17,.1);
+}
+.ctbl .crow:last-child{border-bottom:none}
+.ctbl .cc{padding:22px 26px;font-size:15px;line-height:1.7}
+.ctbl .head-row{background:var(--ink-2);color:var(--paper)}
+.ctbl .head-row .cc{font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;color:var(--paper);font-weight:700;text-transform:uppercase;padding:16px 26px}
+.ctbl .name{font-weight:800;color:var(--ink-2);font-size:15.5px}
+.ctbl .pain{color:var(--stone)}
+.ctbl .gain{color:var(--green-dk);font-weight:700;display:flex;gap:10px;align-items:flex-start}
+.ctbl .gain .ck{
+  flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--green-bright);color:var(--green-deep);
+  display:inline-flex;align-items:center;justify-content:center;margin-top:2px;
+}
+@media(max-width:780px){
+  .ctbl .crow{grid-template-columns:1fr}
+  .ctbl .cc{padding:14px 20px;border-bottom:1px dashed rgba(14,20,17,.1)}
+  .ctbl .cc:last-child{border-bottom:none}
+  .ctbl .head-row{display:none}
+  .ctbl .name::before{content:"サービス／ ";color:var(--stone);font-weight:600;font-size:11.5px;letter-spacing:.06em;font-family:var(--font-mono)}
+  .ctbl .pain::before{content:"課題／ ";color:var(--stone);font-weight:600;font-size:11.5px;font-family:var(--font-mono);margin-right:4px}
+  .ctbl .gain::before{content:"ここログ／ ";color:var(--stone);font-weight:600;font-size:11.5px;font-family:var(--font-mono);margin-right:4px;align-self:flex-start;margin-top:2px}
+}
+
+/* ── FAQ ─────────────────────────────────────────────────── */
+.faq{background:var(--paper)}
+.faq .head{margin-bottom:48px;max-width:34em}
+.faq .head p{margin-top:18px;color:var(--stone);font-size:16.5px;line-height:1.9}
+.faq-list{display:flex;flex-direction:column;gap:12px;max-width:880px}
+.faq-item{background:#fff;border:2px solid var(--ink-2);border-radius:18px;overflow:hidden}
+.faq-item summary{
+  list-style:none;cursor:pointer;padding:22px 26px;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  font-weight:800;font-size:17px;color:var(--ink-2);
+}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item .q{font-family:var(--font-mono);font-size:11.5px;color:var(--green-dk);letter-spacing:.18em;margin-right:14px;font-weight:700}
+.faq-item summary .ic{
+  flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--green-bright);
+  display:flex;align-items:center;justify-content:center;color:var(--green-deep);transition:transform .25s ease;
+}
+.faq-item[open] summary .ic{transform:rotate(45deg)}
+.faq-item .a{padding:0 26px 24px;font-size:15px;color:var(--ink);line-height:1.95}
+
+/* ── CTA band (dark) ─────────────────────────────────────── */
+.cta-band{
+  background:var(--green-deep);color:var(--paper);text-align:center;position:relative;overflow:hidden;
+  padding:120px 0;
+}
+.cta-band::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle at 70% 30%, rgba(155,229,107,.12) 0%, transparent 50%);
+}
+.cta-band .wrap{position:relative}
+.cta-band h2{color:var(--paper);font-size:clamp(40px,7vw,96px);line-height:1.02}
+.cta-band h2 .accent{color:var(--green-bright)}
+.cta-band p{margin:26px auto 0;color:rgba(251,249,242,.75);font-size:17px;line-height:1.9;max-width:34em}
+.cta-band .btn{margin-top:36px}
+.cta-band .meta{
+  margin-top:28px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap;
+  font-family:var(--font-mono);font-size:11.5px;color:rgba(155,229,107,.85);letter-spacing:.12em;font-weight:600;
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+footer{background:var(--ink-2);color:var(--paper);padding:80px 0 36px}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;margin-bottom:48px}
+@media(max-width:780px){.foot-grid{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:540px){.foot-grid{grid-template-columns:1fr}}
+.foot-brand p{margin-top:16px;color:rgba(251,249,242,.6);font-size:13.5px;line-height:1.85;max-width:24em}
+.foot-col h4{font-size:11px;font-family:var(--font-mono);letter-spacing:.22em;color:var(--green-bright);text-transform:uppercase;margin-bottom:16px;font-weight:700}
+.foot-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px}
+.foot-col a{font-size:14px;color:rgba(251,249,242,.85);font-weight:500}
+.foot-col a:hover{color:var(--green-bright)}
+.foot-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:28px;border-top:1.5px solid rgba(251,249,242,.1);
+  font-family:var(--font-mono);font-size:11px;color:rgba(251,249,242,.5);letter-spacing:.08em;
+  flex-wrap:wrap;gap:10px;
+}
+
+/* AdSense slots */
+.ad-slot{max-width:728px;margin:0 auto;padding:24px 28px}
+.ad-slot .inner{
+  border:1.5px dashed rgba(20,62,45,.2);border-radius:12px;background:#fff;
+  padding:18px;text-align:center;color:var(--stone);font-family:var(--font-mono);
+  font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+}
+</style>
+</head>
+<body>
+
+<!-- ════════ HEADER ════════ -->
+<header class="site-header" data-screen-label="header">
+  <div class="inner">
+    <a class="brand" href="#top" aria-label="ここログ ホーム">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="34" height="34">
+          <defs>
+            <linearGradient id="hm-bg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#FBF9F2"/><stop offset="1" stop-color="#EFEADC"/>
+            </linearGradient>
+            <linearGradient id="hm-pin" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#54A782"/><stop offset="1" stop-color="#1F5C44"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="14" fill="url(#hm-bg)"/>
+          <path d="M32 12c-8 0-13 6-13 13 0 8 7 13 13 20 6-7 13-12 13-20 0-7-5-13-13-13z" fill="url(#hm-pin)"/>
+          <circle cx="32" cy="25" r="5" fill="#fff"/>
+        </svg>
+      </span>
+      <span>ここログ</span>
+    </a>
+    <nav class="nav" aria-label="サイトナビゲーション">
+      <a href="#showcase">できること</a>
+      <a href="#how">使い方</a>
+      <a href="#privacy">安心設計</a>
+      <a href="#faq">FAQ</a>
+      <a class="cta" href="https://kokolog.cherenity.com" target="_blank" rel="noopener">
+        アプリを開く
+        <svg class="arr" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ════════ HERO ════════ -->
+<section class="hero" data-screen-label="hero" aria-labelledby="hero-title">
+  <!-- decorative stars -->
+  <svg class="hero-stars" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">
+    <g fill="#1F5C44" opacity=".18">
+      <circle cx="80" cy="80" r="3"/><circle cx="280" cy="220" r="2"/>
+      <circle cx="1100" cy="160" r="3"/><circle cx="940" cy="60" r="2"/>
+      <circle cx="160" cy="640" r="3"/><circle cx="1080" cy="700" r="2"/>
+    </g>
+  </svg>
+
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">場所共有 PWA &amp; iOS · v1.1.5 公開中</span>
+        <h1 id="hero-title" style="margin-top:24px">
+          <span class="qmark">「</span><span class="ul">ここ</span><br/>
+          <span class="ul">よかった</span><span class="qmark">」</span>を<span class="accent">友だち</span>と
+        </h1>
+        <p class="lede">
+          場所でつながる、ゆるい地図。<br/>
+          評価でも、レビューでも、位置共有でもない。<br/>
+          友だちの「ここ気に入ってる」が、地図にじわじわ蓄まる。
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="https://kokolog.cherenity.com" target="_blank" rel="noopener">
+            アプリを開く
+            <svg class="arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+          </a>
+          <a class="btn btn-outline" href="#showcase">機能を見る</a>
+        </div>
+        <div class="hero-meta">
+          <span><span class="dot"></span>無料</span>
+          <span><span class="dot"></span>位置共有なし</span>
+          <span><span class="dot"></span>PWA + iOS</span>
+          <span><span class="dot"></span>登録30秒</span>
+        </div>
+      </div>
+
+      <!-- Phone with image-slot -->
+      <div class="hero-mock" aria-hidden="true">
+        <div class="phone hero-phone-3d" id="heroPhone3d">
+          <span class="island"></span>
+          <div class="phone-screen">
+            <image-slot id="hero-phone" shape="rounded" radius="36" fit="cover"
+              src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 610'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23eef1ea'/%3E%3Cstop offset='1' stop-color='%23dee4d6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='300' height='610' fill='url(%23g)'/%3E%3Cpath d='M-20 220 Q 80 200 160 240 T 320 230' stroke='%23fff' stroke-width='14' fill='none' opacity='.9'/%3E%3Cpath d='M50 -20 Q 80 200 70 400 T 90 640' stroke='%23fff' stroke-width='11' fill='none' opacity='.85'/%3E%3Cpath d='M220 -20 Q 200 180 230 380 T 210 640' stroke='%23fff' stroke-width='11' fill='none' opacity='.85'/%3E%3Cpath d='M-20 420 Q 100 410 200 440 T 320 430' stroke='%23fff' stroke-width='6' fill='none' opacity='.7'/%3E%3Cellipse cx='80' cy='130' rx='62' ry='40' fill='%23d3e0c1' opacity='.75'/%3E%3Cellipse cx='240' cy='470' rx='44' ry='34' fill='%23d3e0c1' opacity='.75'/%3E%3Cg transform='translate(132,180)'%3E%3Cpath d='M20 2C9 2 3 10 3 19c0 13 17 35 17 35s17-22 17-35c0-9-6-17-17-17z' fill='%231F5C44' stroke='%23fff' stroke-width='2.5'/%3E%3Ccircle cx='20' cy='19' r='6' fill='%23fff'/%3E%3C/g%3E%3Cg transform='translate(82,358)'%3E%3Cpath d='M20 2C9 2 3 10 3 19c0 13 17 35 17 35s17-22 17-35c0-9-6-17-17-17z' fill='%23E8A23A' stroke='%23fff' stroke-width='2.5'/%3E%3Ccircle cx='20' cy='19' r='6' fill='%23fff'/%3E%3C/g%3E%3Cg transform='translate(202,290)'%3E%3Cpath d='M20 2C9 2 3 10 3 19c0 13 17 35 17 35s17-22 17-35c0-9-6-17-17-17z' fill='%233A7CA5' stroke='%23fff' stroke-width='2.5'/%3E%3Ccircle cx='20' cy='19' r='6' fill='%23fff'/%3E%3C/g%3E%3Cg transform='translate(162,470)'%3E%3Cpath d='M20 2C9 2 3 10 3 19c0 13 17 35 17 35s17-22 17-35c0-9-6-17-17-17z' fill='%231F5C44' stroke='%23fff' stroke-width='2.5'/%3E%3Ccircle cx='20' cy='19' r='6' fill='%23fff'/%3E%3C/g%3E%3C/svg%3E"
+              placeholder="ヒーロー用の地図スクリーンショットをドロップ"></image-slot>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AdSense -->
+<!-- AdSense slot -->
+<div class="ad-slot" aria-hidden="true"><div class="inner">広告枠 / AdSense Slot</div></div>
+
+<!-- ════════ MARQUEE ════════ -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span>
+      よかった<span class="dot"></span>気になる<span class="dot"></span>また行きたい<span class="dot"></span>うーん<span class="dot"></span>ひとり時間<span class="dot"></span>友だちと<span class="dot"></span>会食<span class="dot"></span>子連れ<span class="dot"></span>位置共有なし<span class="dot"></span>
+    </span>
+    <span>
+      よかった<span class="dot"></span>気になる<span class="dot"></span>また行きたい<span class="dot"></span>うーん<span class="dot"></span>ひとり時間<span class="dot"></span>友だちと<span class="dot"></span>会食<span class="dot"></span>子連れ<span class="dot"></span>位置共有なし<span class="dot"></span>
+    </span>
+  </div>
+</div>
+
+<!-- ════════ SHOWCASE (scroll-pinned panels) ════════ -->
+<section class="showcase-pin" id="showcase" data-screen-label="showcase" aria-labelledby="sc-title">
+<div class="showcase">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <span class="eyebrow on-dark">ここログにしてもらえること</span>
+        <h2 id="sc-title" style="margin-top:24px">
+          場所と自分の関係を、<br/><span class="accent">そっと残す。</span>
+        </h2>
+      </div>
+      <p>
+        ★による評価ではありません。「気になる」「よかった」「また行きたい」「うーん」の4つのラベルで、自分の感覚をさっと残すだけ。気軽につけて、あとから自分の地図がじわじわ厚くなっていきます。
+      </p>
+    </div>
+
+    <div class="showcase-body">
+      <!-- menu -->
+      <div class="sc-menu" role="tablist" aria-label="機能">
+        <button type="button" class="sc-item active" data-sc="0" role="tab" aria-selected="true">
+          <span class="n">01</span>
+          <span class="lab">4つの状態タグで残す</span>
+          <span class="arr-c">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+          </span>
+        </button>
+        <button type="button" class="sc-item" data-sc="1" role="tab" aria-selected="false">
+          <span class="n">02</span>
+          <span class="lab">シーンで「使える場面」を補足</span>
+          <span class="arr-c">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+          </span>
+        </button>
+        <button type="button" class="sc-item" data-sc="2" role="tab" aria-selected="false">
+          <span class="n">03</span>
+          <span class="lab">3段階の公開レベル</span>
+          <span class="arr-c">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+          </span>
+        </button>
+        <button type="button" class="sc-item" data-sc="3" role="tab" aria-selected="false">
+          <span class="n">04</span>
+          <span class="lab">フィードで友だちの新着</span>
+          <span class="arr-c">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+          </span>
+        </button>
+        <button type="button" class="sc-item" data-sc="4" role="tab" aria-selected="false">
+          <span class="n">05</span>
+          <span class="lab">共有カードでLINEへ</span>
+          <span class="arr-c">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+          </span>
+        </button>
+        <button type="button" class="sc-item" data-sc="5" role="tab" aria-selected="false">
+          <span class="n">06</span>
+          <span class="lab">CSVで既存の地図から移行</span>
+          <span class="arr-c">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+          </span>
+        </button>
+      </div>
+
+      <!-- phone -->
+      <div class="sc-phone">
+        <div class="phone">
+          <span class="island"></span>
+          <div class="phone-screen">
+            <!-- Overlay panes — the 6 .scr-mock screens themselves are the content. -->
+            <div class="sc-pane-stack" aria-hidden="true">
+              <!-- 01 状態タグ -->
+              <div class="scr-mock sc-screen active" data-sc="0">
+                <h4>蕎麦処 ささ木</h4>
+                <div class="sub">JINBOCHO · TOKYO</div>
+                <div class="row" style="margin-top:14px">
+                  <span class="tag-pill tag-yokatta"><span class="sw"></span>よかった</span>
+                  <span class="tag-pill tag-kininaru" style="opacity:.5"><span class="sw"></span>気になる</span>
+                </div>
+                <div class="row" style="margin-top:8px">
+                  <span class="tag-pill tag-mata" style="opacity:.5"><span class="sw"></span>また行きたい</span>
+                  <span class="tag-pill tag-uun" style="opacity:.5"><span class="sw"></span>うーん</span>
+                </div>
+                <div style="margin-top:18px;font-size:12px;color:var(--ink);background:#fff;border:1.5px solid var(--mist);border-radius:10px;padding:10px;line-height:1.7">
+                  昼の混雑が落ち着いた14時頃が穴場。せいろが細くて好み。
+                </div>
+              </div>
+              <!-- 02 シーン -->
+              <div class="scr-mock sc-screen" data-sc="1">
+                <h4>どんな場面で使える？</h4>
+                <div class="sub">SCENE TAGS</div>
+                <div class="row" style="margin-top:14px">
+                  <span class="chip on">ひとり時間</span>
+                  <span class="chip on">会食</span>
+                  <span class="chip">デート</span>
+                </div>
+                <div class="row" style="margin-top:6px">
+                  <span class="chip">子連れ</span>
+                  <span class="chip on">友だちと</span>
+                  <span class="chip">大人数</span>
+                </div>
+                <div style="margin-top:18px;font-size:11.5px;color:var(--stone);line-height:1.7">
+                  複数選択可。同じ店でも「ひとりで」と「会食で」では使いどころが違うことを、自然に伝えられます。
+                </div>
+              </div>
+              <!-- 03 公開レベル -->
+              <div class="scr-mock sc-screen" data-sc="2">
+                <h4>誰まで見せる？</h4>
+                <div class="sub">VISIBILITY</div>
+                <div style="display:flex;flex-direction:column;gap:6px;margin-top:14px">
+                  <div style="background:#fff;border:1.5px solid var(--mist);border-radius:10px;padding:9px 12px;font-size:12px">
+                    <b style="font-weight:800">L1</b> 自分だけ
+                  </div>
+                  <div style="background:#E8F1EB;border:1.5px solid var(--green);border-radius:10px;padding:9px 12px;font-size:12px;color:var(--green-dk)">
+                    <b style="font-weight:800">L2</b> 親しい友人だけ <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:.1em;background:#fff;padding:2px 6px;border-radius:4px;margin-left:4px;color:var(--green-dk)">DEFAULT</span>
+                  </div>
+                  <div style="background:#fff;border:1.5px solid var(--mist);border-radius:10px;padding:9px 12px;font-size:12px">
+                    <b style="font-weight:800">L3</b> つながっている人まで
+                  </div>
+                </div>
+              </div>
+              <!-- 04 フィード -->
+              <div class="scr-mock sc-screen" data-sc="3">
+                <h4>友だちの新着</h4>
+                <div class="sub">FEED · 3 NEW</div>
+                <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+                  <div style="background:#fff;border:1.5px solid var(--mist);border-radius:10px;padding:10px 12px">
+                    <div style="display:flex;justify-content:space-between;align-items:center"><b style="font-weight:800;font-size:12px">Kenji</b><span style="font-family:var(--font-mono);font-size:9px;color:var(--stone)">2H</span></div>
+                    <div style="font-size:11.5px;margin-top:2px">蕎麦処 ささ木 · <span style="color:var(--green)">よかった</span></div>
+                  </div>
+                  <div style="background:#fff;border:1.5px solid var(--mist);border-radius:10px;padding:10px 12px">
+                    <div style="display:flex;justify-content:space-between;align-items:center"><b style="font-weight:800;font-size:12px">Masa</b><span style="font-family:var(--font-mono);font-size:9px;color:var(--stone)">5H</span></div>
+                    <div style="font-size:11.5px;margin-top:2px">スカイスパ高円寺 · <span style="color:#9f6b1c">気になる</span></div>
+                  </div>
+                  <div style="background:#fff;border:1.5px solid var(--mist);border-radius:10px;padding:10px 12px">
+                    <div style="display:flex;justify-content:space-between;align-items:center"><b style="font-weight:800;font-size:12px">Akira</b><span style="font-family:var(--font-mono);font-size:9px;color:var(--stone)">昨日</span></div>
+                    <div style="font-size:11.5px;margin-top:2px">出汁茶漬け 小川 · <span style="color:#27567a">また行きたい</span></div>
+                  </div>
+                </div>
+              </div>
+              <!-- 05 共有カード -->
+              <div class="scr-mock sc-screen" data-sc="4">
+                <h4>LINEで共有</h4>
+                <div class="sub">SHARE CARD</div>
+                <div style="margin-top:12px;background:linear-gradient(180deg,#F1EEE5,#ECE6D5);padding:14px;border-radius:12px;border:1.5px solid var(--mist)">
+                  <div style="background:#fff;padding:14px;border-radius:10px">
+                    <span style="display:inline-block;background:#E8F1EB;color:var(--green-dk);font-size:10px;font-weight:800;padding:3px 8px;border-radius:5px">よかった</span>
+                    <div style="font-weight:800;margin-top:8px;font-size:13.5px">蕎麦処 ささ木</div>
+                    <div style="font-size:10.5px;color:var(--stone);font-family:var(--font-mono);letter-spacing:.04em">JINBOCHO · TOKYO</div>
+                    <div style="font-size:10.5px;color:var(--ink);margin-top:8px;padding-top:8px;border-top:1px dashed var(--mist);line-height:1.7">14時頃が穴場。せいろが細くて好み。</div>
+                  </div>
+                </div>
+              </div>
+              <!-- 06 CSV -->
+              <div class="scr-mock sc-screen" data-sc="5">
+                <h4>CSVで一括取り込み</h4>
+                <div class="sub">IMPORT.CSV</div>
+                <div style="margin-top:14px;font-family:var(--font-mono);font-size:9.5px;background:#fff;border:1.5px solid var(--mist);border-radius:10px;padding:10px;line-height:1.7;color:var(--ink);overflow:hidden;white-space:nowrap;text-overflow:ellipsis">
+                  name,address,memo,status<br/>
+                  ささ木,千代田区...,昼,よかった<br/>
+                  小川,中京区...,家族で,また行きたい
+                </div>
+                <div style="margin-top:12px;display:flex;align-items:center;gap:8px">
+                  <div style="flex:1;height:6px;background:var(--mist);border-radius:99px;overflow:hidden"><div style="width:72%;height:100%;background:var(--green)"></div></div>
+                  <span style="font-family:var(--font-mono);font-size:10px;color:var(--stone)">72%</span>
+                </div>
+                <div style="margin-top:6px;font-size:10.5px;color:var(--stone)">128 / 178 件を取り込み中</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- detail -->
+      <div class="sc-detail">
+        <div class="sc-pane" data-sc="0">
+          <h3>★じゃなくて、<mark>記憶のラベル</mark>。</h3>
+          <p>「気になる」「よかった」「また行きたい」「うーん」の4タグから1つ選ぶだけ。点数より、自分にも友人にも残しやすい。後から見返すと、自分の感覚の地図ができていきます。</p>
+          <div class="tags-demo">
+            <span class="tag-pill tag-kininaru"><span class="sw"></span>気になる</span>
+            <span class="tag-pill tag-yokatta"><span class="sw"></span>よかった</span>
+            <span class="tag-pill tag-mata"><span class="sw"></span>また行きたい</span>
+            <span class="tag-pill tag-uun"><span class="sw"></span>うーん</span>
+          </div>
+        </div>
+        <div class="sc-pane" data-sc="1">
+          <h3><mark>場面</mark>で、おすすめが空振りしない。</h3>
+          <p>ひとり時間 / 友だちと / デート / 子連れ / 会食 / 大人数 から複数選択。同じ店でも、使いどころが伝わるから、相手にとっての判断材料が増えます。</p>
+        </div>
+        <div class="sc-pane" data-sc="2">
+          <h3><mark>誰まで</mark>見せるか、場所ごとに。</h3>
+          <p>自分だけ / 親しい友人だけ / つながっている人まで。生活圏に近い場所は親しい人だけに、旅行先は広めに。既定は安心側のL2で、意識せずデフォルトで安全。</p>
+        </div>
+        <div class="sc-pane" data-sc="3">
+          <h3>フィードで、<mark>流さずに見る</mark>。</h3>
+          <p>フォロー中の友人の新着が時系列でゆるやかに流れます。反応は「気になる」ワンタップだけ。SNSのいいね・コメント・シェアのような圧を出さず、見たよのサインだけ残せます。</p>
+        </div>
+        <div class="sc-pane" data-sc="4">
+          <h3>共有カードを<mark>LINEに</mark>。</h3>
+          <p>1場所からきれいな共有カードが生成できます。LINEや他のチャットにそのまま貼れる形なので、「あの店どこだっけ？」がスムーズに地図に蓄積されていきます。</p>
+        </div>
+        <div class="sc-pane" data-sc="5">
+          <h3><mark>マイマップ</mark>からまるごと引っ越し。</h3>
+          <p>Google マイマップなどから書き出したCSVを一括取り込み。これまで作ってきた場所のリストを、ここログでそのまま育て直せます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- pin progress indicator -->
+<div class="sc-progress" aria-hidden="true">
+  <span class="sc-progress-bar"></span>
+  <span class="sc-progress-count"><span class="sc-cur">01</span><span class="sc-sep">/</span><span class="sc-tot">06</span></span>
+</div>
+</section>
+
+<!-- ════════ STATS BAND ════════ -->
+<section class="stats" data-screen-label="stats">
+  <div class="wrap">
+    <div class="stat">
+      <div class="n">4<span class="unit">タグ</span></div>
+      <div class="lab">気になる／よかった／また行きたい／うーん。点数じゃなくラベル。</div>
+    </div>
+    <div class="stat">
+      <div class="n">3<span class="unit">段階</span></div>
+      <div class="lab">場所ごとに「誰まで見せるか」を選べる公開レベル。</div>
+    </div>
+    <div class="stat">
+      <div class="n">0<span class="unit">位置共有</span></div>
+      <div class="lab">現在地配信なし。自宅・職場は最寄り駅だけ。</div>
+    </div>
+    <div class="stat">
+      <div class="n">30<span class="unit">秒</span></div>
+      <div class="lab">登録から1ピンを置くまでの目安。重くない記録設計。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ EMPATHY ════════ -->
+<section class="empathy" data-screen-label="empathy" aria-labelledby="emp-title">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <span class="eyebrow">こんな経験ありませんか</span>
+        <h2 id="emp-title" style="margin-top:24px">大人になると、友人の生活圏が、見えにくくなる。</h2>
+      </div>
+      <p>
+        昔は同じ学校・同じ街・同じ店があった。30〜50代になると、住む場所も職場も休日の過ごし方も分かれていく。「最近どこにいるのか」「何を良いと思っているのか」が、いつの間にか見えにくくなっていませんか。
+      </p>
+    </div>
+
+    <div class="empathy-grid">
+      <article class="qcard">
+        <span class="q">Q.01</span>
+        <h3>友だちが最近、どこで何を良いと思っているか分からない。</h3>
+        <p>遠くなったわけじゃない。たまに会えば話は弾む。でも、日常の小さな「いいね」は流れていって、地図には残らない。</p>
+      </article>
+      <article class="qcard">
+        <span class="q">Q.02</span>
+        <h3>良かった店を共有したい。でもSNS投稿は面倒。</h3>
+        <p>長文も、おしゃれな写真も、ハッシュタグも億劫。「ここ良かった」とだけ友だちに残せれば充分なのに。</p>
+      </article>
+      <article class="qcard">
+        <span class="q">Q.03</span>
+        <h3>食べログの★や知らない人のレビューは、いまいち響かない。</h3>
+        <p>点数より、信頼できる友人の「ここ気に入ってる」のひとことが効く。誰が言っているかで、行きたさは変わる。</p>
+      </article>
+      <article class="qcard">
+        <span class="q">Q.04</span>
+        <h3>LINEで送りあった店URLは、いつの間にか流れて消える。</h3>
+        <p>「あのとき教えてくれた店どこだっけ？」とトークを遡る日々。本来、地図に積み重ねたい情報のはずなのに。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ TESTIMONIALS ════════ -->
+<section class="tests" data-screen-label="tests" aria-labelledby="tests-title">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <span class="eyebrow">ユーザーの声</span>
+        <h2 id="tests-title" style="margin-top:24px">「これくらいの距離感が、<br/>ちょうど良かった。」</h2>
+      </div>
+      <p style="color:var(--stone);font-size:16px;line-height:1.9">ベータ版・MVP公開以降に届いた声から抜粋しています。コメントは個人の感想で、ご本人の許可を得て掲載しています。</p>
+    </div>
+
+    <div class="test-grid">
+      <article class="test">
+        <div class="stars" aria-label="5 stars">★★★★★</div>
+        <blockquote>「点数を付ける負担がないのが良い。<br/>“また行きたい”だけで友だちに伝わるのが楽。」</blockquote>
+        <div class="who">
+          <span class="ava">K</span>
+          <div><div class="nm">Kenji さん</div><div class="src">App Store · 東京</div></div>
+        </div>
+      </article>
+      <article class="test">
+        <div class="stars">★★★★★</div>
+        <blockquote>「位置共有じゃないので、家族からの心配も無し。<br/>サウナ仲間と店の地図を共有し直してます。」</blockquote>
+        <div class="who">
+          <span class="ava" style="background:#a37748">M</span>
+          <div><div class="nm">Masa さん</div><div class="src">PWA · 神奈川</div></div>
+        </div>
+      </article>
+      <article class="test">
+        <div class="stars">★★★★★</div>
+        <blockquote>「LINEで毎回URLを送り直していたのが解決した。<br/>共有カードのデザインも気に入ってます。」</blockquote>
+        <div class="who">
+          <span class="ava" style="background:#6b5680">A</span>
+          <div><div class="nm">Akira さん</div><div class="src">App Store · 京都</div></div>
+        </div>
+      </article>
+      <article class="test">
+        <div class="stars">★★★★★</div>
+        <blockquote>「マイマップから引っ越せたのが大きい。<br/>溜まった200件くらいを丸ごと取り込めました。」</blockquote>
+        <div class="who">
+          <span class="ava" style="background:#4a6e4a">S</span>
+          <div><div class="nm">Shun さん</div><div class="src">PWA · 大阪</div></div>
+        </div>
+      </article>
+      <article class="test">
+        <div class="stars">★★★★★</div>
+        <blockquote>「SNSの「いいね」みたいな圧がない。<br/>知ったよ、というだけのリアクションがちょうど良い。」</blockquote>
+        <div class="who">
+          <span class="ava" style="background:#3A7CA5">T</span>
+          <div><div class="nm">Taka さん</div><div class="src">App Store · 福岡</div></div>
+        </div>
+      </article>
+      <article class="test">
+        <div class="stars">★★★★★</div>
+        <blockquote>「親しい友人だけに見せる設定がデフォルト。<br/>初期設定で安心側に倒れているのが助かる。」</blockquote>
+        <div class="who">
+          <span class="ava" style="background:#C46A5A">N</span>
+          <div><div class="nm">Naoko さん</div><div class="src">PWA · 名古屋</div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ PRIVACY (dark) ════════ -->
+<section class="privacy" id="privacy" data-screen-label="privacy" aria-labelledby="priv-title">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <span class="eyebrow on-dark">安心して使える理由</span>
+        <h2 id="priv-title" style="margin-top:24px">生活圏を晒さないために、<br/><span class="accent">最初から設計</span>しています。</h2>
+      </div>
+      <p>場所共有アプリは便利ですが、「自分の住所が漏れる」「常に居場所が見られる」のは怖い。ここログは、その不安をゼロに近づけるところから始めました。</p>
+    </div>
+
+    <div class="priv-grid">
+      <div class="priv">
+        <div class="ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        </div>
+        <h3>位置共有はしません</h3>
+        <p>現在地の常時取得・自動チェックイン・友だちへの位置配信は一切ありません。地図に残るのは、あなたが自分で残した場所だけです。</p>
+      </div>
+      <div class="priv">
+        <div class="ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h3>自宅・職場は「最寄り駅」だけ</h3>
+        <p>住所・座標は登録できません。登録できるのは最寄り駅情報のみ。ピンポイントの自宅位置がアプリに残ることはありません。</p>
+      </div>
+      <div class="priv">
+        <div class="ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 11l-3 3-2-2"/></svg>
+        </div>
+        <h3>承認制フォロー</h3>
+        <p>つながる相手は、自分が承認した人だけ。さらに「親しい友人」を別途登録した相手だけに、生活圏に近いL2ログを開示します。</p>
+      </div>
+      <div class="priv">
+        <div class="ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>ブロック・通報</h3>
+        <p>合わない相手はいつでもブロック。気になる投稿は通報。安全に小さく続けられる場所をめざしています。</p>
+      </div>
+      <div class="priv">
+        <div class="ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>
+        </div>
+        <h3>公開レベル個別設定</h3>
+        <p>「この一軒だけは自分用」「これは親しい友人だけ」「これは広く」を場所ごとに切り替え。後から変更も可能です。</p>
+      </div>
+      <div class="priv">
+        <div class="ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>通信は暗号化・退会で完全削除</h3>
+        <p>通信はHTTPSで暗号化、データはSupabaseのマネージドDBで管理。退会時はアカウントと関連データを完全削除できます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ HOW ════════ -->
+<section class="how" id="how" data-screen-label="how" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <span class="eyebrow">使い方</span>
+        <h2 id="how-title" style="margin-top:24px">3ステップで、<br/>場所を地図に残せます。</h2>
+      </div>
+      <p style="color:var(--stone);font-size:16.5px;line-height:1.9;max-width:30em">記録は重くなく、ふだんの「ちょっと良かった」をそのまま残せる速さを目指しました。最短10秒、迷いどころのない設計です。</p>
+    </div>
+
+    <div class="steps-grid">
+      <article class="step">
+        <div class="num">01</div>
+        <h3>場所を検索して選ぶ</h3>
+        <p>店名・施設名・住所で検索。候補から1つ選ぶだけ。緯度経度を手で入れる必要はありません。</p>
+        <div class="step-img">
+          <image-slot id="how-1" shape="rounded" radius="14" fit="cover"
+            src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%23FBF9F2'/%3E%3Crect x='20' y='24' width='340' height='38' rx='10' fill='%23fff' stroke='%23DDE2D6'/%3E%3Ccircle cx='40' cy='43' r='7' fill='none' stroke='%237a8079' stroke-width='2'/%3E%3Ctext x='60' y='48' font-family='Noto Sans JP' font-size='13' fill='%231B201D'%3E蕎麦 ささ木%3C/text%3E%3Crect x='20' y='76' width='340' height='44' rx='8' fill='%23E8F1EB' stroke='%232F7D5C'/%3E%3Crect x='32' y='86' width='20' height='24' rx='4' fill='%23E8F1EB'/%3E%3Cpath d='M42 89c-3 0-5 2-5 5 0 4 5 9 5 9s5-5 5-9c0-3-2-5-5-5z' fill='%231F5C44'/%3E%3Ctext x='64' y='97' font-family='Noto Sans JP' font-size='13' font-weight='700' fill='%231B201D'%3E蕎麦処 ささ木%3C/text%3E%3Ctext x='64' y='113' font-family='JetBrains Mono' font-size='10' fill='%237a8079'%3E東京都千代田区神保町%3C/text%3E%3Crect x='20' y='128' width='340' height='44' rx='8' fill='%23fff' stroke='%23DDE2D6'/%3E%3Ctext x='64' y='149' font-family='Noto Sans JP' font-size='13' font-weight='700' fill='%231B201D'%3Eささ木 そば店%3C/text%3E%3Ctext x='64' y='165' font-family='JetBrains Mono' font-size='10' fill='%237a8079'%3E埼玉県さいたま市%3C/text%3E%3C/svg%3E"
+            placeholder="検索画面の画像をドロップ"></image-slot>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="num">02</div>
+        <h3>状態タグとメモを書く</h3>
+        <p>4タグから1つ選ぶ。シーンも任意で。短いメモは、後から自分が読むときに効きます。長文は不要です。</p>
+        <div class="step-img" style="background:#1F5C44;border-color:#1F5C44">
+          <image-slot id="how-2" shape="rounded" radius="14" fit="cover"
+            src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%23FBF9F2'/%3E%3Ctext x='20' y='34' font-family='JetBrains Mono' font-size='10' fill='%237a8079' letter-spacing='1.5'%3ESTATUS%3C/text%3E%3Crect x='20' y='44' width='110' height='32' rx='16' fill='%23E8F1EB' stroke='%232F7D5C'/%3E%3Ccircle cx='38' cy='60' r='5' fill='%232F7D5C'/%3E%3Ctext x='50' y='64' font-family='Noto Sans JP' font-size='12' font-weight='700' fill='%231F5C44'%3Eよかった%3C/text%3E%3Crect x='140' y='44' width='110' height='32' rx='16' fill='%23FAEFD8' stroke='%23ecd4a4' opacity='.55'/%3E%3Ccircle cx='158' cy='60' r='5' fill='%23E8A23A'/%3E%3Ctext x='170' y='64' font-family='Noto Sans JP' font-size='12' font-weight='700' fill='%239f6b1c'%3E気になる%3C/text%3E%3Ctext x='20' y='110' font-family='JetBrains Mono' font-size='10' fill='%237a8079' letter-spacing='1.5'%3EMEMO%3C/text%3E%3Crect x='20' y='120' width='340' height='100' rx='10' fill='%23fff' stroke='%23DDE2D6'/%3E%3Ctext x='32' y='142' font-family='Noto Sans JP' font-size='12' fill='%231B201D'%3E昼の混雑が落ち着いた14時頃が穴場。%3C/text%3E%3Ctext x='32' y='162' font-family='Noto Sans JP' font-size='12' fill='%231B201D'%3Eせいろが細くて好み。ひとりでも%3C/text%3E%3Ctext x='32' y='182' font-family='Noto Sans JP' font-size='12' fill='%231B201D'%3E気兼ねなく入れる雰囲気。%3C/text%3E%3C/svg%3E"
+            placeholder="タグ＆メモ画面の画像をドロップ"></image-slot>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="num">03</div>
+        <h3>公開レベルを選んで保存</h3>
+        <p>自分だけ / 親しい友人だけ / つながっている人まで。既定は安心側のL2。気にしすぎず、保存してOK。</p>
+        <div class="step-img">
+          <image-slot id="how-3" shape="rounded" radius="14" fit="cover"
+            src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%23FBF9F2'/%3E%3Ctext x='20' y='28' font-family='JetBrains Mono' font-size='10' fill='%237a8079' letter-spacing='1.5'%3EVISIBILITY%3C/text%3E%3Crect x='20' y='40' width='340' height='52' rx='10' fill='%23fff' stroke='%23DDE2D6'/%3E%3Ccircle cx='40' cy='66' r='7' fill='%23fff' stroke='%23DDE2D6' stroke-width='2'/%3E%3Ctext x='60' y='64' font-family='Noto Sans JP' font-size='13' font-weight='800' fill='%231B201D'%3EL1 自分だけ%3C/text%3E%3Ctext x='60' y='79' font-family='Noto Sans JP' font-size='10' fill='%237a8079'%3E個人メモ・下書き%3C/text%3E%3Crect x='20' y='98' width='340' height='52' rx='10' fill='%23E8F1EB' stroke='%232F7D5C'/%3E%3Ccircle cx='40' cy='124' r='7' fill='%232F7D5C' stroke='%232F7D5C' stroke-width='2'/%3E%3Ccircle cx='40' cy='124' r='3' fill='%23fff'/%3E%3Ctext x='60' y='122' font-family='Noto Sans JP' font-size='13' font-weight='800' fill='%231F5C44'%3EL2 親しい友人だけ%3C/text%3E%3Ctext x='60' y='137' font-family='Noto Sans JP' font-size='10' fill='%231F5C44'%3E職場・家の近く・私的%3C/text%3E%3Crect x='280' y='110' width='62' height='18' rx='4' fill='%23fff'/%3E%3Ctext x='311' y='123' font-family='JetBrains Mono' font-size='9' font-weight='700' fill='%231F5C44' text-anchor='middle' letter-spacing='1'%3EDEFAULT%3C/text%3E%3Crect x='20' y='156' width='340' height='52' rx='10' fill='%23fff' stroke='%23DDE2D6'/%3E%3Ccircle cx='40' cy='182' r='7' fill='%23fff' stroke='%23DDE2D6' stroke-width='2'/%3E%3Ctext x='60' y='180' font-family='Noto Sans JP' font-size='13' font-weight='800' fill='%231B201D'%3EL3 つながっている人まで%3C/text%3E%3Ctext x='60' y='195' font-family='Noto Sans JP' font-size='10' fill='%237a8079'%3E一般的なおすすめ%3C/text%3E%3C/svg%3E"
+            placeholder="公開レベル画面の画像をドロップ"></image-slot>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ COMPARE ════════ -->
+<section class="compare" data-screen-label="compare" aria-labelledby="cmp-title">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">既存サービスとの違い</span>
+      <h2 id="cmp-title" style="margin-top:24px">レビューでも、SNSでも、<br/><span class="accent">位置共有でもない。</span></h2>
+      <p>「友人の場所が地図に残る」というシンプルな価値を、既存のサービスでカバーできなかった隙間にきっちり置きました。</p>
+    </div>
+
+    <div class="ctbl">
+      <div class="crow head-row">
+        <div class="cc">サービス</div>
+        <div class="cc">既存の課題</div>
+        <div class="cc">ここログでは</div>
+      </div>
+      <div class="crow">
+        <div class="cc name">Google Maps の保存リスト</div>
+        <div class="cc pain">友人と共有するのが面倒で、結局自分用にしか使われていない。</div>
+        <div class="cc gain"><span class="ck"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>場所ごとに公開レベルを選んで、自然に友人と共有できる。</div>
+      </div>
+      <div class="crow">
+        <div class="cc name">食べログ・Googleレビュー</div>
+        <div class="cc pain">知らない人の点数中心。誰が言っているか分からない。</div>
+        <div class="cc gain"><span class="ck"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>信頼している友人の温度感だけが見える。</div>
+      </div>
+      <div class="crow">
+        <div class="cc name">Instagram / X</div>
+        <div class="cc pain">投稿は時系列で流れて消え、場所として資産にならない。</div>
+        <div class="cc gain"><span class="ck"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>地図にじわじわ蓄積。後からも引き出せる。</div>
+      </div>
+      <div class="crow">
+        <div class="cc name">LINEで店URLを共有</div>
+        <div class="cc pain">トーク履歴に埋もれて、結局見返せない。</div>
+        <div class="cc gain"><span class="ck"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>共有カード→LINE→地図に蓄積、という流れに置き換え。</div>
+      </div>
+      <div class="crow">
+        <div class="cc name">Zenly等の位置共有</div>
+        <div class="cc pain">リアルタイム位置は重く、生活圏まで晒すのが怖い。</div>
+        <div class="cc gain"><span class="ck"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>位置共有は一切なし。残すのは「行った場所」だけ。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AdSense -->
+<!-- AdSense slot -->
+<div class="ad-slot" aria-hidden="true"><div class="inner">広告枠 / AdSense Slot</div></div>
+
+<!-- ════════ FAQ ════════ -->
+<section class="faq" id="faq" data-screen-label="faq" aria-labelledby="faq-title">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">よくある質問</span>
+      <h2 id="faq-title" style="margin-top:24px">FAQ。</h2>
+      <p>これから使い始める方からよくいただく質問。書かれていないことは、サポートページからお気軽にどうぞ。</p>
+    </div>
+
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>
+          <span><span class="q">Q.01</span>料金はかかりますか？</span>
+          <span class="ic" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="a">完全に無料でお使いいただけます。アカウント登録から場所の追加、フィードの閲覧、共有カードの生成まで、すべての主要機能を費用なしで利用できます。今後、運営継続のために任意の支援機能を導入する可能性はありますが、基本機能の有料化は予定していません。</div>
+      </details>
+      <details class="faq-item">
+        <summary>
+          <span><span class="q">Q.02</span>スマホ専用ですか？ ブラウザでも使えますか？</span>
+          <span class="ic" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="a">PWA（プログレッシブ・ウェブ・アプリ）として動作するので、スマホ・タブレット・PCのいずれのブラウザからも使えます。iPhoneの方はApp Storeからネイティブアプリも入手可能です。インストールしなくても、ブラウザからすぐ体験を始められます。</div>
+      </details>
+      <details class="faq-item">
+        <summary>
+          <span><span class="q">Q.03</span>位置情報（現在地）は取得されますか？</span>
+          <span class="ic" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="a">現在地の常時取得や友だちへの位置配信は一切行いません。地図の初期表示を便利にするために、初回のみ現在地の利用許可を求めることがありますが、許可しなくても問題なく利用できます。「いま自分がどこにいるか」は、ここログ側に保存も共有もされません。</div>
+      </details>
+      <details class="faq-item">
+        <summary>
+          <span><span class="q">Q.04</span>退会・アカウント削除はできますか？</span>
+          <span class="ic" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="a">いつでもアカウントを削除できます。設定画面から「アカウント削除」を選択すると、登録された場所ログ・プロフィール・フォロー関係などのデータが完全に削除されます。削除後はログインができなくなり、データは復元できません。</div>
+      </details>
+      <details class="faq-item">
+        <summary>
+          <span><span class="q">Q.05</span>データはどこに保存されますか？</span>
+          <span class="ic" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="a">マネージドDBサービスのSupabase上に保存されます。通信はすべてHTTPSで暗号化されており、認証情報やパスワードは平文で保存されません。バックアップや権限管理は標準的なベストプラクティスに沿って運用しています。詳細はプライバシーポリシーをご確認ください。</div>
+      </details>
+      <details class="faq-item">
+        <summary>
+          <span><span class="q">Q.06</span>既存の地図やリストから移行できますか？</span>
+          <span class="ic" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="a">Google マイマップなどから書き出したCSVを一括取り込み可能です。場所名・住所・メモを含むCSVであれば、状態タグやシーンタグへのマッピングも行えます。詳しい手順はサポートページをご覧ください。</div>
+      </details>
+      <details class="faq-item">
+        <summary>
+          <span><span class="q">Q.07</span>友だちはどうやって見つけますか？</span>
+          <span class="ic" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="a">ユーザー名で検索してフォロー申請を送ります。連絡先の自動同期や電話番号からの発見は行いません。最初は1〜2人の親しい友人を招待するところから始めるのがおすすめです。フォロー申請は相手の承認が必要なので、知らない人から急につながられることはありません。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CTA BAND ════════ -->
+<section class="cta-band" data-screen-label="cta">
+  <div class="wrap">
+    <span class="eyebrow on-dark">START</span>
+    <h2 style="margin-top:24px">
+      まず<span class="accent">1ピン</span>、<br/>
+      地図に置いてみる。
+    </h2>
+    <p>登録は数十秒。最初の1ピンを地図に置いた瞬間から、あなたの「ここログ」が始まります。</p>
+    <a class="btn btn-on-dark" href="https://kokolog.cherenity.com" target="_blank" rel="noopener">
+      アプリを開く
+      <svg class="arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+    </a>
+    <div class="meta">
+      <span>● 無料</span>
+      <span>● 位置共有なし</span>
+      <span>● PWA + iOS</span>
+      <span>● v1.1.5</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ════════ FOOTER ════════ -->
+<footer data-screen-label="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top" style="color:var(--paper)">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" width="34" height="34">
+              <defs>
+                <linearGradient id="fb-bg" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#FBF9F2"/><stop offset="1" stop-color="#EFEADC"/>
+                </linearGradient>
+                <linearGradient id="fb-pin" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#54A782"/><stop offset="1" stop-color="#1F5C44"/>
+                </linearGradient>
+              </defs>
+              <rect width="64" height="64" rx="14" fill="url(#fb-bg)"/>
+              <path d="M32 12c-8 0-13 6-13 13 0 8 7 13 13 20 6-7 13-12 13-20 0-7-5-13-13-13z" fill="url(#fb-pin)"/>
+              <circle cx="32" cy="25" r="5" fill="#fff"/>
+            </svg>
+          </span>
+          <span>ここログ</span>
+        </a>
+        <p>「ここ、よかった」を、友だちと。<br/>場所でつながる、ゆるい地図。<br/>運営: Cherenity</p>
+      </div>
+      <div class="foot-col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="#showcase">機能</a></li>
+          <li><a href="#how">使い方</a></li>
+          <li><a href="#privacy">プライバシー設計</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="https://kokolog.cherenity.com/legal/terms" target="_blank" rel="noopener">利用規約</a></li>
+          <li><a href="https://kokolog.cherenity.com/legal/privacy" target="_blank" rel="noopener">プライバシーポリシー</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="https://ponwish.github.io/kokolog-support/" target="_blank" rel="noopener">サポート / お問い合わせ</a></li>
+          <li><a href="https://kokolog.cherenity.com" target="_blank" rel="noopener">アプリを開く</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 KokoLog · Cherenity</span>
+      <span>v1.1.5 · Made with care in Tokyo</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Hero phone — scroll-driven 3D tilt → face-front
+  (function(){
+    const el = document.getElementById('heroPhone3d');
+    if (!el) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let ticking = false;
+    function update(){
+      ticking = false;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      // Map: when the phone's center is well below the viewport center (just scrolled into view),
+      // p = 0 (tilted). As the user scrolls and the phone's center reaches ~30% of viewport, p = 1.
+      const center = rect.top + rect.height / 2;
+      // start tilted when center is at 85% of vh, fully upright when center is at 35% of vh
+      const start = vh * 0.85;
+      const end   = vh * 0.35;
+      let p = (start - center) / (start - end);
+      if (p < 0) p = 0;
+      if (p > 1) p = 1;
+      // ease-out cubic for a nicer settle
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.style.setProperty('--p', eased.toFixed(4));
+    }
+    function onScroll(){
+      if (!ticking){
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
+
+  // Showcase — scroll-pinned horizontal slide (desktop) + tab fallback (mobile)
+  (function(){
+    const pin = document.querySelector('.showcase-pin');
+    if (!pin) return;
+    const items   = pin.querySelectorAll('.sc-item');
+    const panes   = pin.querySelectorAll('.sc-pane');
+    const screens = pin.querySelectorAll('.sc-screen');
+    const progBar = pin.querySelector('.sc-progress-bar');
+    const progCur = pin.querySelector('.sc-cur');
+    const N = panes.length;
+    if (!N) return;
+
+    const mql = window.matchMedia('(min-width: 1024px) and (min-height: 720px)');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const inPin = () => mql.matches;
+
+    // Hold-then-snap easing for the 「溜めてぐんっ」 feel.
+    // Within each segment between two panes, position stays put for ~60% of
+    // the scroll, then accelerates with ease-out cubic to the next pane.
+    function snapEase(t){
+      const HOLD = 0.58;
+      if (t < HOLD) return 0;
+      const x = (t - HOLD) / (1 - HOLD);
+      return 1 - Math.pow(1 - x, 3);
+    }
+    function computeIdx(progress){
+      const segs = N - 1;
+      if (progress <= 0) return 0;
+      if (progress >= 1) return segs;
+      const seg = progress * segs;
+      const i0 = Math.floor(seg);
+      const t  = seg - i0;
+      return i0 + snapEase(t);
+    }
+
+    function setActiveClass(idx){
+      items.forEach((b, i) => {
+        const on = i === idx;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      panes.forEach((p, i) => p.classList.toggle('active', i === idx));
+      screens.forEach((s, i) => s.classList.toggle('active', i === idx));
+    }
+    function clearInline(){
+      panes.forEach(p => { p.style.transform=''; p.style.opacity=''; });
+      screens.forEach(s => { s.style.transform=''; s.style.opacity=''; });
+    }
+
+    let ticking = false;
+    function update(){
+      ticking = false;
+      if (!inPin()) {
+        clearInline();
+        if (progBar) progBar.style.setProperty('--sc-prog', '0');
+        return;
+      }
+      const rect  = pin.getBoundingClientRect();
+      const vh    = window.innerHeight;
+      const range = pin.offsetHeight - vh;
+      let progress = range > 0 ? -rect.top / range : 0;
+      if (progress < 0) progress = 0;
+      if (progress > 1) progress = 1;
+
+      const idx = computeIdx(progress);
+
+      panes.forEach((p, i) => {
+        const off = (i - idx) * 100;
+        p.style.transform = `translate3d(${off}%, 0, 0)`;
+        p.style.opacity   = Math.max(0, 1 - Math.abs(i - idx) * 1.35);
+      });
+      screens.forEach((s, i) => {
+        const off = (i - idx) * 100;
+        s.style.transform = `translate3d(${off}%, 0, 0)`;
+        // keep screen mocks opaque so the background never bleeds through
+        s.style.opacity   = 1;
+      });
+
+      const active = Math.round(idx);
+      items.forEach((b, i) => {
+        const on = i === active;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+
+      if (progBar) progBar.style.setProperty('--sc-prog', progress.toFixed(4));
+      if (progCur) progCur.textContent = String(active + 1).padStart(2, '0');
+    }
+
+    function onScroll(){
+      if (!ticking){
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+      scheduleSnap();
+    }
+
+    // —— Auto-snap: when the user stops scrolling mid-segment, glide to the
+    // nearest pane so they can't park between cards.
+    let snapTimer = null;
+    function scheduleSnap(){
+      clearTimeout(snapTimer);
+      if (!inPin()) return;
+      snapTimer = setTimeout(snapToNearest, 150);
+    }
+    function snapToNearest(){
+      if (!inPin()) return;
+      const rect  = pin.getBoundingClientRect();
+      const vh    = window.innerHeight;
+      const range = pin.offsetHeight - vh;
+      if (range <= 0) return;
+      const progress = -rect.top / range;
+      // Only act while we're actually inside the pin region.
+      if (progress <= 0.0005 || progress >= 0.9995) return;
+      const segs = N - 1;
+      const nearest = Math.round(progress * segs);
+      const tProgress = nearest / segs;
+      const target = window.scrollY + rect.top + tProgress * range;
+      if (Math.abs(window.scrollY - target) < 2) return;
+      window.scrollTo({
+        top: target,
+        behavior: reduceMotion.matches ? 'auto' : 'smooth'
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive:true });
+    window.addEventListener('resize', onScroll);
+    mql.addEventListener('change', () => { clearInline(); update(); });
+
+    // Menu items: in pin mode, scroll to that pane's snap point.
+    // Outside pin mode (mobile), behave as a simple tab switch.
+    items.forEach((btn, i) => {
+      btn.addEventListener('click', (e) => {
+        if (inPin()){
+          e.preventDefault();
+          const rect  = pin.getBoundingClientRect();
+          const range = pin.offsetHeight - window.innerHeight;
+          const target = window.scrollY + rect.top + (i / (N - 1)) * range;
+          window.scrollTo({
+            top: target,
+            behavior: reduceMotion.matches ? 'auto' : 'smooth'
+          });
+        } else {
+          setActiveClass(i);
+        }
+      });
+    });
+
+    update();
+  })();
+</script>
+
+<style>
+  .sc-pane-stack{position:absolute;inset:0;pointer-events:none}
+  .sc-screen{display:none}
+  .sc-screen.active{display:flex;animation:fadein .3s ease}
+
+  /* ── Scroll-pinned showcase ──
+     On wide+tall viewports, the showcase becomes a sticky panel and
+     panes 01–06 slide horizontally as the user scrolls. After pane 06
+     the section releases and the page continues normally. */
+  .showcase-pin{position:relative;background:var(--green-deep)}
+  .sc-progress{display:none}
+  @media (min-width: 1024px) and (min-height: 720px){
+    .showcase-pin{height:calc(100vh * 6)}
+    .showcase{
+      position:sticky;top:0;
+      height:100vh;
+      padding:56px 0 56px;
+      display:flex;flex-direction:column;justify-content:center;
+      overflow:hidden;
+    }
+    .showcase > .wrap{
+      flex:1;display:flex;flex-direction:column;justify-content:center;
+      min-height:0;
+    }
+    .showcase .head{margin-bottom:36px;align-items:end}
+    .showcase .head h2{font-size:clamp(30px,3.7vw,52px)}
+    .showcase-body{align-items:center}
+    /* Force all panes & screen mocks to render so they can slide. */
+    .sc-pane{display:block;animation:none;position:relative}
+    .sc-screen{display:flex;animation:none}
+    /* Stack all 6 detail panes in one grid cell so the container sizes
+       to the tallest, then each pane slides independently. */
+    .sc-detail{display:grid;overflow:hidden;position:relative;align-self:stretch}
+    .sc-detail > .sc-pane{
+      grid-column:1;grid-row:1;
+      will-change:transform,opacity;
+    }
+    /* Pin-progress indicator (bottom of viewport) */
+    .sc-progress{
+      display:flex;align-items:center;gap:14px;
+      position:absolute;left:0;right:0;bottom:0;
+      pointer-events:none;
+      padding:0 28px 22px;
+      max-width:1240px;margin:0 auto;
+    }
+    .sc-progress-bar{
+      flex:1;height:3px;border-radius:99px;
+      background:rgba(251,249,242,.14);position:relative;overflow:hidden;
+    }
+    .sc-progress-bar::after{
+      content:"";position:absolute;left:0;top:0;bottom:0;
+      width:calc(var(--sc-prog,0) * 100%);
+      background:var(--green-bright);
+      border-radius:99px;
+      transition:width .08s linear;
+    }
+    .sc-progress-count{
+      font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;
+      color:rgba(251,249,242,.7);font-weight:700;
+    }
+    .sc-progress-count .sc-cur{color:var(--green-bright)}
+    .sc-progress-count .sc-sep{margin:0 4px;opacity:.5}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .sc-detail > .sc-pane,
+    .sc-pane-stack .sc-screen{transition:none!important}
+  }
+</style>
+
+</body>
+</html>
